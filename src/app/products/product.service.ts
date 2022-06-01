@@ -1,6 +1,6 @@
 import { Product, ProductEdit } from './product.model';
 
-const products: Product[] = [];
+let products: Product[] = [];
 
 
 const addProduct = (data: Product) => {
@@ -16,7 +16,7 @@ function getProduct(id: string): string;
 function getProduct(id: string): unknown {
   const product = products.find(product => product.id === id);
 
-  return product ?? `Product with ID ${id} does not exist.`;
+  return product ?? `Product with ID '${id}' does not exist.`;
 }
 
 // updateProduct overloading
@@ -35,8 +35,18 @@ function updateProduct(id: string, changes: ProductEdit):unknown {
   return product;
 }
 
-const deleteProduct = (id: string) => {
-  // code
+// deleteProduct overloading
+function deleteProduct(id: string):Product;
+function deleteProduct(id: string):string;
+
+function deleteProduct(id: string):unknown {
+  const product = getProduct(id);
+
+  if (product) {
+    products = products.filter(product => product.id !== id);
+  }
+
+  return product;
 }
 
 export {
@@ -44,4 +54,5 @@ export {
   addProduct,
   getProduct,
   updateProduct,
+  deleteProduct,
 }
