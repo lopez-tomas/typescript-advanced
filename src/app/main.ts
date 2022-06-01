@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker';
 
-import { products, addProduct, getProduct, updateProduct } from './products/product.service';
+import { products, addProduct, getProduct, updateProduct, deleteProduct } from './products/product.service';
 
 for (let i = 0; i < 50; i++) {
   addProduct({
-    id: i === 0 ? 'id-test' : faker.datatype.uuid(),
+    id: i === 49 ? 'id-test' : faker.datatype.uuid(),
     title: faker.commerce.productName(),
     category: {
       id: faker.datatype.uuid(),
@@ -27,8 +27,8 @@ for (let i = 0; i < 50; i++) {
 
 console.log(products);
 
-const searchProduct = getProduct('id-test');
-const searchProduct2 = getProduct('5bedbb0d-e92e-4681-8711-a38a22ba0c91');
+let searchProduct = getProduct('id-test');
+let searchProduct2 = getProduct('5bedbb0d-e92e-4681-8711-a38a22ba0c91');
 console.log('\n\nsearchProduct:\n', searchProduct);
 console.log('\nsearchProduct2:\n', searchProduct2);
 
@@ -71,3 +71,13 @@ const editProduct2 = updateProduct('5bedbb0d-e92e-4681-8711-a38a22ba0c91', {
   updatedAt: new Date()
 });
 console.log('\n\neditProduct2:\n', editProduct2);
+
+const removedProduct = deleteProduct('id-test');
+const removedProduct2 = deleteProduct('5bedbb0d-e92e-4681-8711-a38a22ba0c91');
+console.log('\n\nremovedProduct:\n', removedProduct);
+console.log('\n\nremovedProduct2:\n', removedProduct2);
+
+searchProduct = getProduct('id-test');
+searchProduct2 = getProduct('5bedbb0d-e92e-4681-8711-a38a22ba0c91');
+console.log('\n\nsearchProduct:\n', searchProduct);
+console.log('\nsearchProduct2:\n', searchProduct2);
