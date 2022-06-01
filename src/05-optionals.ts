@@ -21,8 +21,8 @@ console.log(p2);
 const p3 = createProduct(3);
 console.log(p3);
 
-//    0   === false
-//    ''  === false
+//    0   == false
+//    ''  == false
 //  false === false
 
 const p4 = createProduct(2, false, 0);
