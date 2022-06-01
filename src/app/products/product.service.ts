@@ -1,4 +1,4 @@
-import { Product } from './product.model';
+import { Product, ProductEdit } from './product.model';
 
 const products: Product[] = [];
 
@@ -19,8 +19,20 @@ function getProduct(id: string): unknown {
   return product ?? `Product with ID ${id} does not exist.`;
 }
 
-const updateProduct = (id: string, changes: Product) => {
-  // code
+// updateProduct overloading
+function updateProduct(id: string, changes: ProductEdit): Product;
+function updateProduct(id: string, changes: ProductEdit): string;
+
+function updateProduct(id: string, changes: ProductEdit):unknown {
+  const product = getProduct(id);
+
+  if (product) {
+    products.map(product => {
+      product.id === id && Object.assign(product, changes);
+    });
+  }
+
+  return product;
 }
 
 const deleteProduct = (id: string) => {
@@ -31,4 +43,5 @@ export {
   products,
   addProduct,
   getProduct,
+  updateProduct,
 }
