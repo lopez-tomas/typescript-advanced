@@ -33,3 +33,23 @@ console.log('resString:', "['N', 'i', 'c', 'o'] =>", resString);
 
 const resBoolean = parseString(12);
 console.log('resBoolean:', `${12} =>`, resBoolean)
+
+// # Good practices # //
+/*
+  - If we have an unknown | any type in a function overloading, theese must be declared at the end to avoid problems.
+
+  - If we have a function overloading that always returns a number (for example) and the only difference is the number
+  of parameters... do we really need an overloading? Or could just be a function with optional parameters? Let's avoid
+  unnecessary overloadings.
+
+  - If we have three function overloadings:
+    1. Receives no parameters => returns a number;
+    2. Receives a number      => returns a Moment;
+    3. Receives a string      => returns a Moment;
+
+  We don't need 3 overloadings, we could just use 2:
+    1. Receives no parameters     => returns a number
+    2. Receives a number | string => returns a Moment;
+
+  There is no need to create two separate overloadings that returns the same type.
+*/
