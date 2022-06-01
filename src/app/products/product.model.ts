@@ -7,13 +7,13 @@ interface Product extends BaseModel {
   title: string;
   category: Category;
   price: number;
-  description: string;
-  image: string;
   stock: number;
-  size?: Sizes;
-  color: string;
   isNew: boolean;
+  image: string;
+  description: string;
   tags: string[];
+  size?: Sizes;
+  color?: string;
 }
 
 export {
