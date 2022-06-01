@@ -15,3 +15,8 @@ const newUser: User = {
 }
 
 console.log(newUser);
+
+export {
+  Roles,
+  User,
+}
