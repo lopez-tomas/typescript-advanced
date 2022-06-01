@@ -1,11 +1,12 @@
+import { BaseModel } from '../base.model';
+
 enum Roles {
   Admin = "ADMIN",
   Seller = "SELLER",
   Customer = "CUSTOMER",
 }
 
-interface User {
-  id: string | number;
+interface User extends BaseModel {
   username: string;
   role: Roles;
 }
