@@ -3,7 +3,7 @@ import { BaseModel } from '../base.model';
 
 type Sizes = 'S' | 'M' | 'L' | 'XL';
 
-interface Product extends BaseModel {
+interface ProductEdit {
   title: string;
   category: Category;
   price: number;
@@ -14,9 +14,13 @@ interface Product extends BaseModel {
   tags: string[];
   size?: Sizes;
   color?: string;
+  updatedAt: Date;
 }
+
+interface Product extends BaseModel, ProductEdit {}
 
 export {
   Product,
+  ProductEdit,
   Sizes
 }
