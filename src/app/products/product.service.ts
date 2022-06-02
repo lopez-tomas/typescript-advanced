@@ -25,20 +25,20 @@ const addProduct = (data: CreateProductDto): Product => {
 }
 
 // getProduct overloading
-function getProduct(id: string): Product;
-function getProduct(id: string): string;
+function getProduct(id: Product['id']): Product;
+function getProduct(id: Product['id']): string;
 
-function getProduct(id: string): unknown {
+function getProduct(id: Product['id']): unknown {
   const product = products.find(product => product.id === id);
 
   return product ?? `Product with ID '${id}' does not exist.`;
 }
 
 // updateProduct overloading
-function updateProduct(id: string, changes: UpdateProductDto): Product;
-function updateProduct(id: string, changes: UpdateProductDto): string;
+function updateProduct(id: Product['id'], changes: UpdateProductDto): Product;
+function updateProduct(id: Product['id'], changes: UpdateProductDto): string;
 
-function updateProduct(id: string, changes: UpdateProductDto): unknown {
+function updateProduct(id: Product['id'], changes: UpdateProductDto): unknown {
   const index = products.findIndex(product => product.id === id);
 
   if (index) {
@@ -53,10 +53,10 @@ function updateProduct(id: string, changes: UpdateProductDto): unknown {
 }
 
 // deleteProduct overloading
-function deleteProduct(id: string): Product;
-function deleteProduct(id: string): string;
+function deleteProduct(id: Product['id']): Product;
+function deleteProduct(id: Product['id']): string;
 
-function deleteProduct(id: string): unknown {
+function deleteProduct(id: Product['id']): unknown {
   const product = getProduct(id);
 
   if (product) {
