@@ -7,6 +7,11 @@ interface CreateProductDto extends Omit<Product, 'id' | 'createdAt' | 'updatedAt
 
 // type example = Pick<Product, 'color'| 'description'>
 
+interface UpdateProductDto extends Partial<Omit <CreateProductDto, 'createdAt'> > {}
+
+// type example2 = Required<Product>;
+
 export {
   CreateProductDto,
+  UpdateProductDto,
 }
