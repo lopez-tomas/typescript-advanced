@@ -11,8 +11,9 @@ interface UpdateProductDto extends Partial<CreateProductDto> {
 }
 // type example2 = Required<Product>;
 
-interface FindProductDto extends Readonly<Partial <Omit <Product, 'category'>>> {
+interface FindProductDto extends Readonly<Partial <Omit <Product, 'tags'>>> {
   readonly categoryId?: string;
+  readonly tags?: ReadonlyArray<string>
 }
 
 
