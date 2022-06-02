@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 import { Product, ProductEdit } from './product.model';
-import { CreateProductDto } from './product.dto';
+import { CreateProductDto, UpdateProductDto } from './product.dto';
 
 let products: Product[] = [];
 
@@ -35,19 +35,21 @@ function getProduct(id: string): unknown {
 }
 
 // updateProduct overloading
-function updateProduct(id: string, changes: ProductEdit): Product;
-function updateProduct(id: string, changes: ProductEdit): string;
+function updateProduct(id: string, changes: UpdateProductDto): Product;
+function updateProduct(id: string, changes: UpdateProductDto): string;
 
-function updateProduct(id: string, changes: ProductEdit):unknown {
-  const product = getProduct(id);
+function updateProduct(id: string, changes: UpdateProductDto):unknown {
+  const index = products.findIndex(product => product.id === id);
 
-  if (product) {
-    products.map(product => {
-      product.id === id && Object.assign(product, changes);
-    });
+  if (index) {
+    const prevData = products[index];
+    products[index] = {
+      ...prevData,
+      ...changes
+    }
   }
 
-  return product;
+  return index ? products[index] : `Product with ID '${id}' does not exist.`;
 }
 
 // deleteProduct overloading
