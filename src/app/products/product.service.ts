@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 import { Product, ProductEdit } from './product.model';
-import { CreateProductDto, UpdateProductDto } from './product.dto';
+import { CreateProductDto, UpdateProductDto, FindProductDto } from './product.dto';
 
 let products: Product[] = [];
 
@@ -38,7 +38,7 @@ function getProduct(id: string): unknown {
 function updateProduct(id: string, changes: UpdateProductDto): Product;
 function updateProduct(id: string, changes: UpdateProductDto): string;
 
-function updateProduct(id: string, changes: UpdateProductDto):unknown {
+function updateProduct(id: string, changes: UpdateProductDto): unknown {
   const index = products.findIndex(product => product.id === id);
 
   if (index) {
@@ -53,10 +53,10 @@ function updateProduct(id: string, changes: UpdateProductDto):unknown {
 }
 
 // deleteProduct overloading
-function deleteProduct(id: string):Product;
-function deleteProduct(id: string):string;
+function deleteProduct(id: string): Product;
+function deleteProduct(id: string): string;
 
-function deleteProduct(id: string):unknown {
+function deleteProduct(id: string): unknown {
   const product = getProduct(id);
 
   if (product) {
@@ -66,10 +66,27 @@ function deleteProduct(id: string):unknown {
   return product;
 }
 
+const findProducts = (dto: FindProductDto): Product[] => {
+  const productsFound = products.filter(product => {
+    let flag: boolean = false;
+    for (const property in dto) {
+      flag = product[property as keyof Product] === dto[property as keyof FindProductDto];
+    }
+
+    if (flag) {
+      return product;
+    }
+  })
+
+  return productsFound;
+}
+
+
 export {
   products,
   addProduct,
   getProduct,
   updateProduct,
   deleteProduct,
+  findProducts,
 }
