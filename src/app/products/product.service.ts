@@ -1,12 +1,27 @@
+import { faker } from '@faker-js/faker';
+
 import { Product, ProductEdit } from './product.model';
+import { CreateProductDto } from './product.dto';
 
 let products: Product[] = [];
 
 
-const addProduct = (data: Product) => {
-  // data.id = 'fjksdjfkaskf'; // readonly
-  // data.createdAt = new Date(1998, 6, 8); // readonly
-  products.push(data);
+const addProduct = (data: CreateProductDto): Product => {
+  const newProduct = {
+    ...data,
+    id: faker.datatype.uuid(),
+    createdAt: faker.date.recent(),
+    updatedAt: faker.date.recent(),
+    category: {
+      id: data.categoryId,
+      name: faker.commerce.department(),
+      createdAt: faker.date.recent(),
+      updatedAt: faker.date.recent(),
+    }
+  }
+
+  products.push(newProduct);
+  return newProduct;
 }
 
 // getProduct overloading
