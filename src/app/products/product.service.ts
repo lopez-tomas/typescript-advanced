@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { Product, ProductEdit } from './product.model';
+import { Product } from './product.model';
 import { CreateProductDto, UpdateProductDto, FindProductDto } from './product.dto';
 
 let products: Product[] = [];
@@ -24,6 +24,7 @@ const addProduct = (data: CreateProductDto): Product => {
   return newProduct;
 }
 
+
 // getProduct overloading
 function getProduct(id: Product['id']): Product;
 function getProduct(id: Product['id']): string;
@@ -33,6 +34,7 @@ function getProduct(id: Product['id']): unknown {
 
   return product ?? `Product with ID '${id}' does not exist.`;
 }
+
 
 // updateProduct overloading
 function updateProduct(id: Product['id'], changes: UpdateProductDto): Product;
@@ -52,6 +54,7 @@ function updateProduct(id: Product['id'], changes: UpdateProductDto): unknown {
   return index ? products[index] : `Product with ID '${id}' does not exist.`;
 }
 
+
 // deleteProduct overloading
 function deleteProduct(id: Product['id']): Product;
 function deleteProduct(id: Product['id']): string;
@@ -65,6 +68,7 @@ function deleteProduct(id: Product['id']): unknown {
 
   return product;
 }
+
 
 const findProducts = (dto: FindProductDto): Product[] => {
   const productsFound = products.filter(product => {
