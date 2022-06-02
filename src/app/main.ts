@@ -4,14 +4,8 @@ import { products, addProduct, getProduct, updateProduct, deleteProduct } from '
 
 for (let i = 0; i < 50; i++) {
   addProduct({
-    id: i === 49 ? 'id-test' : faker.datatype.uuid(),
     title: faker.commerce.productName(),
-    category: {
-      id: faker.datatype.uuid(),
-      name: faker.commerce.department(),
-      createdAt: faker.date.recent(),
-      updatedAt: faker.date.recent(),
-    },
+    categoryId: faker.datatype.uuid(),
     price: parseFloat(faker.commerce.price()),
     stock: faker.datatype.number({min: 10, max: 100}),
     isNew: faker.datatype.boolean(),
@@ -20,8 +14,6 @@ for (let i = 0; i < 50; i++) {
     tags: faker.helpers.arrayElements(),
     size: faker.helpers.arrayElement(['S', 'M', 'L', 'XL']),
     color: faker.color.human(),
-    createdAt: faker.date.recent(),
-    updatedAt: faker.date.recent(),
   });
 }
 
